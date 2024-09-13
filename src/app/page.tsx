@@ -1,7 +1,11 @@
 'use client'
-import React, { useEffect, useState } from 'react';
-import ReactSelect, { MultiValue } from 'react-select';
-import { calculateReturns, getStockData } from '@/lib/stock-data';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { MultiValue } from 'react-select';
+import { calculateReturns, getStockData } from '@/actions/stock-action';
+import { OptionProps, ValidationErrorType } from '@/data/types';
+import { ArrowRight } from 'lucide-react';
+import GetStockForm from '@/components/GetStockForm';
 
 export type StockData = {
   Date: string;
@@ -13,26 +17,27 @@ export type StockData = {
   ticker: string;
 };
 
-type OptionProps = { value: string, label: string }
 
 export default function Home() {
   const [stockData, setStockData] = useState<StockData[]>([]);
   const [returnsData, setReturnsData] = useState<( StockData & { return: number | null } )[]>([]);
   const [ticker, setTicker] = useState<OptionProps[]>([{ label: 'Apple', value: 'AAPL' }]);
-  const [startDate, setStartDate] = useState<string>('2023-01-01');
-  const [endDate, setEndDate] = useState<string>('2023-04-06');
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [errors, setErrors] = useState<ValidationErrorType | undefined>(undefined);
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  const fetchData = async () => {
+  const fetchDataAction = async (formData: FormData) => {
     const __tickers = ticker.map(company => company.value);
+    const startDate = formData.get('startDate') as string, 
+      endDate = formData.get('endDate') as string;
+
     const data = await getStockData(__tickers, startDate, endDate);
-    const returns = calculateReturns(data);
-    setStockData(data);
-    setReturnsData(returns);
+    if (Array.isArray(data))  {
+      const returns = await calculateReturns(data);
+      setReturnsData(returns);
+      setStockData(data);
+    } else {
+      setErrors(data)
+    }
+
   }
 
   const handleSelect = (payload: MultiValue<OptionProps>) => {
@@ -46,59 +51,15 @@ export default function Home() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Stock Analysis</h1>
-      <form onSubmit={e => { e.preventDefault(); fetchData(); }}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium">Select Stock</label>
-          {isMounted && 
-            <ReactSelect
-              options={[
-                { label: 'American Airlines', value: 'AAL' },
-                { label: 'Apple', value: 'AAPL' },
-                { label: 'Microsoft', value: 'MSFT' },
-                { label: 'Amazon', value: 'AMZN' },
-                { label: 'Google', value: 'GOOGL' }
-              ]}
-              id='stock'
-              defaultValue={ticker}
-              onChange={handleSelect}
-              isMulti={true}
-            />}
-        </div>
+      <div className='flex items-center justify-between flex-wrap gap-3'>
+        <h1 className="text-3xl font-bold mb-4">Stock Analysis</h1>
+        <Link href='/stock-comparison' className='flex items-center gap-1 bg-blue-500 rounded-lg py-2 px-3 text-md text-white'>
+          Compare Stock
+          <ArrowRight />
+        </Link>
+      </div>
 
-        <div className='grid grid-cols-4 items-center gap-3'>
-          <div>
-            <label className="block text-sm font-medium">Start Date</label>
-            <input
-              type="date"
-              className="mt-1"
-              defaultValue={startDate}
-              onChange={e => setStartDate(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">End Date</label>
-            <input
-              type="date"
-              className="mt-1"
-              defaultValue={endDate}
-              onChange={e => setEndDate(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Analysis Type</label>
-            <select name="" id="">
-              <option value="">Select Type</option>
-            </select>
-          </div>
-
-          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">
-            Analyze
-          </button>
-        </div>
-      </form>
+      <GetStockForm {...{ fetchDataAction, errors }} />
 
       <div className="grid grid-cols-2 gap-10 my-6">
         {/* Display stock data */}
