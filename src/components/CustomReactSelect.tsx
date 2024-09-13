@@ -1,3 +1,4 @@
+'use client'
 import { OptionProps } from '@/data/types';
 import clsx from 'clsx';
 import React, { forwardRef, useEffect, useState } from 'react'

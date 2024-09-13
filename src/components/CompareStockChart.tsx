@@ -1,5 +1,5 @@
-import { CompareStockType, SelectedTickersType } from '@/data/types';
 import React from 'react'
+import { CompareStockType, SelectedTickersType } from '@/data/types';
 import { Bar, BarChart, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 type CompareStockChartProps = {
@@ -10,11 +10,7 @@ type CompareStockChartProps = {
 const CompareStockChart: React.FC<CompareStockChartProps> = ({ comparedData, selectedTickers }) => {
   return (
     <ResponsiveContainer height={600} width='100%'>
-      <BarChart
-        width={500}
-        height={300}
-        data={comparedData}
-      >
+      <BarChart data={comparedData}>
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />

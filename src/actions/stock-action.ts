@@ -1,11 +1,10 @@
 'use server'
 import axios from 'axios';
 import { parse } from 'csv-parse';
-import { StockData } from '@/app/page';
 import { SERVER_URL } from '../data/constants';
 import { getStockSchema } from '@/schemas/getStockSchema';
 import { validationParser } from '@/utils/validationParser';
-import { ValidationErrorType } from '@/data/types';
+import { StockData, ValidationErrorType } from '@/data/types';
 import { compareStockSchema } from '@/schemas/compareStockSchema';
 
 

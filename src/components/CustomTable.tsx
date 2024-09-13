@@ -12,22 +12,22 @@ export type CustomTableProps<T> = {
 
 const CustomTable = <T,>({ columns, data }: CustomTableProps<T>) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full table-auto border">
+    <div className="overflow-auto w-full max-h-[70vh]">
+      <table className="relative min-w-full table-auto border">
         <thead>
-          <tr className="bg-gray-200">
+          <tr className="relative">
             {columns.map((col, index) => (
-              <th key={index} className="px-4 py-2 border">
+              <th key={index} className="px-4 py-2 border sticky top-0 bg-gray-200">
                 {col.header}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody> 
           {data.map((row, rowIndex) => (
             <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
               {columns.map((col, colIndex) => (
-                <td key={colIndex} className="px-4 py-2 border">
+                <td key={colIndex} className="px-4 py-2 whitespace-nowrap border">
                   {(row[col.accessor] as unknown as string) || 'N/A'}
                 </td>
               ))}

@@ -5,13 +5,13 @@ import CustomInput from './CustomInput'
 import { ValidationErrorType } from '@/data/types'
 
 type CompareStockFormProps = {
-  formSubmitAction: (formData: FormData) => void
+  compareStockAction: (formData: FormData) => void
   errors: ValidationErrorType
 }
 
-const CompareStockForm: React.FC<CompareStockFormProps> = ({ formSubmitAction, errors }) => {
+const CompareStockForm: React.FC<CompareStockFormProps> = ({ compareStockAction, errors }) => {
   return (
-    <form action={formSubmitAction} className='grid grid-cols-4 max-sm:grid-cols-1 items-start gap-5'>
+    <form action={compareStockAction} className='grid grid-cols-4 max-sm:grid-cols-1 items-start gap-5'>
       <CustomSelect
         label="Stock A"
         name="tickerA"
@@ -48,7 +48,7 @@ const CompareStockForm: React.FC<CompareStockFormProps> = ({ formSubmitAction, e
         required
       />
 
-      <button type="submit" className="bg-blue-500 text-white py-2 h-11 px-4 rounded-md">
+      <button type="submit" className="bg-green-500 text-white py-2 h-11 px-4 rounded-md">
         Compare
       </button>
     </form>
