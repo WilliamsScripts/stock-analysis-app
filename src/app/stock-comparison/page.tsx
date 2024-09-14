@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import Loading from '@/components/Loading';
 import React, { lazy, Suspense } from 'react'
-import useStockHook from '@/hooks/useStockHook';
+import { useStockCompareHook } from '@/hooks/useStockHook';
 import CompareStockForm from '@/components/CompareStockForm';
 
 const CompareStockChart = lazy(() => import('@/components/CompareStockChart'));
@@ -16,7 +16,7 @@ export default function StockComparison() {
     comparedData,
     selectedTickers,
     compareStockAction 
-  } = useStockHook()
+  } = useStockCompareHook()
 
   return (
     <div className='container mx-auto max-xl:px-4 py-10'>
@@ -31,10 +31,10 @@ export default function StockComparison() {
       <div className="grid grid-cols-1 gap-10">
         <CompareStockForm {...{ compareStockAction, errors }} />
 
-        {comparedData.length > 0 && (
+        {comparedData?.length > 0 && (
           <Suspense fallback={<Loading />}>
             <CompareStockChart {...{ comparedData, selectedTickers }} />
-            <CompareStockTable {...{ comparedData }} />
+            <CompareStockTable {...{ comparedData, selectedTickers }} />
           </Suspense>)}
       </div>
     </div>

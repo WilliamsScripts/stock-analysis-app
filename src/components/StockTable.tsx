@@ -18,7 +18,10 @@ type StockTableProps = {
 
 const StockTable: React.FC<StockTableProps> = ({ stockData }) => {
   return (
-    <CustomTable columns={stockColumns} data={stockData} />
+    <div>
+      <h2 className="text-xl font-semibold mb-2">Stock Data</h2>
+      <CustomTable columns={stockColumns} data={stockData} />
+    </div>
   )
 }
 

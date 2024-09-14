@@ -53,6 +53,7 @@ export async function getStockData(tickers: string[], startDate: string, endDate
         new Date(record.Date) <= new Date(endDate)
     );
   } catch (error) {
+    // return undefine
     throw new Error('Error fetching stock data: ' + error);
   }
 }

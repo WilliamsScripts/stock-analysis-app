@@ -33,6 +33,8 @@ const GetStockForm: React.FC<GetStockFormProps> = ({ fetchDataAction, errors, ti
             label='Start Date'
             name="startDate"
             defaultValue='2023-01-01'
+            min='2023-01-01'
+            max='2023-04-06'
             error={errors?.startDate?.join(', ')}
           />
 
@@ -41,12 +43,14 @@ const GetStockForm: React.FC<GetStockFormProps> = ({ fetchDataAction, errors, ti
             label='End Date'
             name="endDate"
             defaultValue='2023-04-06'
+            min='2023-01-01'
+            max='2023-04-06'
             error={errors?.endDate?.join(', ')}
           />
         </div>
       </div>
       <button type="submit" className="bg-green-500 text-white py-2 px-4 max-md:w-full rounded-md">
-        Generate Data
+        Fetch result
       </button>
     </form>
   )

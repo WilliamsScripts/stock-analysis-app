@@ -18,8 +18,8 @@ This project is a stock price comparison tool built with **Next.js 14**, **TypeS
 
 ### Prerequisites
 To run this project locally, you will need:
-- **Node.js** (v14 or above) and **npm**
 - An internet connection to install dependencies
+- **Node.js** (v14 or above) and **npm**
 
 ### Installation
 

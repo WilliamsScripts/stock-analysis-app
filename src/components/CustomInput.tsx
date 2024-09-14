@@ -1,27 +1,18 @@
 import clsx from 'clsx'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, InputHTMLAttributes } from 'react'
 
-type CustomInputProps = {
+type CustomInputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string 
-  name: string 
-  type: string
-  defaultValue?: string
-  required?: boolean
   error?: string 
-  className?: string
   wrapperClasses?: string
 }
 
-const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({ label, name, type, defaultValue, className, wrapperClasses, required, error, ...attributes }, ref) => {
+const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({ label, className, wrapperClasses, error, ...attributes }, ref) => {
   return (
     <div className={clsx(wrapperClasses)}>
       {label && <label className="block text-sm font-medium">{label}</label>}
       <input
-        type={type}
-        name={name}
         className={clsx("my-1 h-11 px-2.5 w-full border text-sm rounded-lg", className)}
-        defaultValue={defaultValue}
-        required={required}
         ref={ref}
         {...attributes}
       />

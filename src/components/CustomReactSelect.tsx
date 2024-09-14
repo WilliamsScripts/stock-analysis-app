@@ -1,8 +1,8 @@
 'use client'
-import { OptionProps } from '@/data/types';
 import clsx from 'clsx';
-import React, { forwardRef, useEffect, useState } from 'react'
+import { OptionProps } from '@/data/types';
 import ReactSelect, { SelectInstance } from 'react-select';
+import React, { forwardRef, useEffect, useState } from 'react'
 
 export type CustomReactSelectProps = {
   label: string

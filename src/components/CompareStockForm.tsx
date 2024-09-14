@@ -15,7 +15,6 @@ const CompareStockForm: React.FC<CompareStockFormProps> = ({ compareStockAction,
       <CustomSelect
         label="Stock A"
         name="tickerA"
-        defaultValue='AAL'
         options={STOCK_OPTIONS}
         error={errors?.tickerA?.join(', ')}
         required={false}
@@ -24,7 +23,6 @@ const CompareStockForm: React.FC<CompareStockFormProps> = ({ compareStockAction,
       <CustomSelect 
         label="Stock B"
         name="tickerB"
-        defaultValue='AAPL'
         options={STOCK_OPTIONS}
         error={errors?.tickerB?.join(', ')}
         required={false}
@@ -34,18 +32,18 @@ const CompareStockForm: React.FC<CompareStockFormProps> = ({ compareStockAction,
         label="Start Date"
         name="startDate"
         type="date"
-        defaultValue='2023-01-01'
+        min='2023-01-01'
+        max='2023-04-06'
         error={errors?.startDate?.join(', ')}
-        required
       />
 
       <CustomInput 
         label="End Date"
         name="endDate"
         type="date"
-        defaultValue='2023-04-06'
+        min='2023-01-01'
+        max='2023-04-06'
         error={errors?.endDate?.join(', ')}
-        required
       />
 
       <button type="submit" className="bg-green-500 text-white py-2 h-11 px-4 rounded-md">

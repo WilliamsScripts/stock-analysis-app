@@ -8,11 +8,6 @@ const useStockHook = () => {
   const [returnsData, setReturnsData] = useState<(Partial<StockData> & { return: number | null })[]>([]);
   const [ticker, setTicker] = useState<OptionProps[]>([{ label: 'Apple', value: 'AAPL' }]);
   const [errors, setErrors] = useState<ValidationErrorType | undefined>(undefined);
-  const [comparedData, setComparedData] = useState<CompareStockType[]>([]);
-  const [selectedTickers, setSelectedTickers] = useState<SelectedTickersType>({
-    tickerA: '',
-    tickerB: ''
-  });
 
   const fetchDataAction = async (formData: FormData): Promise<void> => {
     const __tickers = ticker.map(company => company.value);
@@ -39,6 +34,24 @@ const useStockHook = () => {
       return [...filteredPrev, ...newSelections];
     });
   };
+  
+  return {
+    stockData,
+    returnsData,
+    ticker,
+    errors,
+    fetchDataAction,
+    handleTickerSelect
+  }
+}
+
+const useStockCompareHook = () => {
+  const [errors, setErrors] = useState<ValidationErrorType | undefined>(undefined);
+  const [comparedData, setComparedData] = useState<CompareStockType[]>([]);
+  const [selectedTickers, setSelectedTickers] = useState<SelectedTickersType>({
+    tickerA: '',
+    tickerB: ''
+  });
 
   const compareStockAction = async (formData: FormData): Promise<void> => {
     setErrors(undefined)
@@ -54,18 +67,13 @@ const useStockHook = () => {
       tickerB: formData.get('tickerB') as string,
     });
   }
-  
+
   return {
-    stockData,
-    returnsData,
-    ticker,
-    errors,
     comparedData,
     selectedTickers,
-    fetchDataAction,
-    handleTickerSelect,
+    errors,
     compareStockAction
   }
 }
 
-export default useStockHook
+export { useStockHook, useStockCompareHook }

@@ -14,4 +14,6 @@ export type OptionProps = { value: string, label: string }
 
 export type SelectedTickersType = { tickerA: string, tickerB: string }
 
+export type ColorType = { [x: string]: string }
+
 export interface CompareStockType { date: string; stockA: number; stockB: number; }[]

@@ -1,28 +1,21 @@
 import clsx from 'clsx'
-import React, { forwardRef } from 'react'
 import { OptionProps } from '@/data/types'
+import React, { forwardRef, SelectHTMLAttributes } from 'react'
 
-type CustomSelectProps = {
+type CustomSelectProps = SelectHTMLAttributes<HTMLSelectElement> &  {
   label: string
-  name: string 
-  defaultValue?: string
-  required?: boolean
-  className?: string
   options?: OptionProps[]
   error?: string 
   wrapperClasses?: string
 }
 
-const CustomSelect = forwardRef<HTMLSelectElement, CustomSelectProps>(({ label, name, wrapperClasses, className, defaultValue, required, error, options, ...attributes }, ref) => {
+const CustomSelect = forwardRef<HTMLSelectElement, CustomSelectProps>(({ label, wrapperClasses, className, error, options, ...attributes }, ref) => {
   return (
     <div className={clsx(wrapperClasses)}>
       {label && <label className="block text-sm font-medium">{label}</label>}
-      <select 
-        name={name} 
-        defaultValue={defaultValue} 
-        ref={ref} 
-        required={required} 
+      <select
         className={clsx("my-1 h-11 px-2.5 w-full border text-sm rounded-lg", className)} 
+        ref={ref}
         {...attributes}
       >
         <option value="">Select Stock</option>

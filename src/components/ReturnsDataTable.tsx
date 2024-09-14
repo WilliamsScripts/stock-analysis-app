@@ -14,7 +14,10 @@ type ReturnsDataTableProps = {
 
 const ReturnsDataTable: React.FC<ReturnsDataTableProps> = ({ returnsData }) => {
   return (
-    <CustomTable columns={returnsColumns} data={returnsData} />
+    <div>
+      <h2 className="text-xl font-semibold mb-2">Returns Data</h2>
+      <CustomTable columns={returnsColumns} data={returnsData} />
+    </div>
   )
 }
 
