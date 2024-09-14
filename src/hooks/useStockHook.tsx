@@ -14,7 +14,7 @@ const useStockHook = () => {
     tickerB: ''
   });
 
-  const fetchDataAction = async (formData: FormData) => {
+  const fetchDataAction = async (formData: FormData): Promise<void> => {
     const __tickers = ticker.map(company => company.value);
     const startDate = formData.get('startDate') as string, 
       endDate = formData.get('endDate') as string;
@@ -30,7 +30,7 @@ const useStockHook = () => {
 
   }
 
-  const handleTickerSelect = (newValue: unknown) => {
+  const handleTickerSelect = (newValue: unknown): void => {
     const value = newValue as OptionProps[]
     setTicker((prev: OptionProps[]) => {
       const selectedValues = value.map(option => option.value);
@@ -40,7 +40,7 @@ const useStockHook = () => {
     });
   };
 
-  const compareStockAction = async (formData: FormData) => {
+  const compareStockAction = async (formData: FormData): Promise<void> => {
     setErrors(undefined)
     setComparedData([])
     const result = await compareStock(formData)

@@ -4,8 +4,8 @@ import { parse } from 'csv-parse';
 import { SERVER_URL } from '../data/constants';
 import { getStockSchema } from '@/schemas/getStockSchema';
 import { validationParser } from '@/utils/validationParser';
-import { StockData, ValidationErrorType } from '@/data/types';
 import { compareStockSchema } from '@/schemas/compareStockSchema';
+import { CompareStockType, StockData, ValidationErrorType } from '@/data/types';
 
 
 export async function parseStockData(): Promise<StockData[]> {
@@ -72,7 +72,7 @@ export async function calculateReturns(stockData: Partial<StockData>[]): Promise
   });
 }
 
-export async function compareStock(formData: FormData) {
+export async function compareStock(formData: FormData): Promise<ValidationErrorType | CompareStockType[]> {
   const tickerA = formData.get('tickerA') as string;
   const tickerB = formData.get('tickerB') as string;
   const startDate = formData.get('startDate') as string;
@@ -95,4 +95,6 @@ export async function compareStock(formData: FormData) {
       stockB: stockDataB[index]?.close || 0,
     }));
   }
+
+  return [];
 }

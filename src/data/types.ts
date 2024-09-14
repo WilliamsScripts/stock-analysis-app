@@ -12,6 +12,6 @@ export type ValidationErrorType = { [x: string]: string[] | undefined;[x: number
 
 export type OptionProps = { value: string, label: string }
 
-export interface CompareStockType { date: string; stockA: number; stockB: number; }[]
-
 export type SelectedTickersType = { tickerA: string, tickerB: string }
+
+export interface CompareStockType { date: string; stockA: number; stockB: number; }[]
