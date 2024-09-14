@@ -4,7 +4,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'rec
 
 
 type ReturnsChartProps = {
-  returnsData: (StockData & { return: number | null })[]
+  returnsData: (Partial<StockData> & { return: number | null })[]
 }
 
 const ReturnsChart: React.FC<ReturnsChartProps> = ({ returnsData }) => {

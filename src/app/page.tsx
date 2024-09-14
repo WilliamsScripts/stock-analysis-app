@@ -25,7 +25,7 @@ export default function Home() {
     <div className="container mx-auto p-6">
       <div className='flex items-center justify-between flex-wrap gap-3 mb-5'>
         <h1 className="text-3xl font-bold">Stock Analysis</h1>
-        <Link href='/stock-comparison' className='flex items-center gap-1 text-blue-500 rounded-lg py-2 px-3 text-md'>
+        <Link href='/stock-comparison' className='flex items-center gap-1 text-blue-500 rounded-lg text-md'>
           Compare Stock
           <ArrowRight />
         </Link>
@@ -56,14 +56,13 @@ export default function Home() {
 
         {/* Display returns data chart */}
         {returnsData.length > 0 && (
-          <Suspense fallback={<Loading />}>
-            <div className='col-span-2'>
+          <div className='col-span-2'>
+            <Suspense fallback={<Loading />}>
               <h2 className="text-xl font-semibold mb-3">Returns Chart</h2>
               <ReturnsChart {...{ returnsData }} />
-            </div>
-          </Suspense>
+            </Suspense>
+          </div>
         )}
-
       </div>
     </div>
   );

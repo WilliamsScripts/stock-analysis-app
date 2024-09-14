@@ -21,7 +21,7 @@ export default function StockComparison() {
   return (
     <div className='container mx-auto max-xl:px-4 py-10'>
       <div className='flex flex-wrap items-center gap-3 mb-10'>
-        <Link href='/' className='flex items-center gap-1 text-blue-500 rounded-lg py-2 px-3 text-md'>
+        <Link href='/' className='flex items-center gap-1 text-blue-500 rounded-lg text-md'>
           <ArrowLeft />
           Home
         </Link>

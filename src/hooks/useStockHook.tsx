@@ -5,7 +5,7 @@ import { CompareStockType, OptionProps, SelectedTickersType, StockData, Validati
 
 const useStockHook = () => {
   const [stockData, setStockData] = useState<StockData[]>([]);
-  const [returnsData, setReturnsData] = useState<( StockData & { return: number | null } )[]>([]);
+  const [returnsData, setReturnsData] = useState<(Partial<StockData> & { return: number | null })[]>([]);
   const [ticker, setTicker] = useState<OptionProps[]>([{ label: 'Apple', value: 'AAPL' }]);
   const [errors, setErrors] = useState<ValidationErrorType | undefined>(undefined);
   const [comparedData, setComparedData] = useState<CompareStockType[]>([]);

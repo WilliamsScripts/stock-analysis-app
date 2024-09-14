@@ -57,13 +57,17 @@ export async function getStockData(tickers: string[], startDate: string, endDate
   }
 }
 
-export async function calculateReturns(stockData: StockData[]) {
-  const sortedData = stockData.sort((a, b) => new Date(a.Date).getTime() - new Date(b.Date).getTime());
+export async function calculateReturns(stockData: Partial<StockData>[]): Promise<(Partial<StockData> & { return: number | null })[]> {
+  const sortedData = stockData
+    .filter((data) => data.Date && data.close !== undefined)
+    .sort((a, b) => new Date(a.Date!).getTime() - new Date(b.Date!).getTime());
 
   return sortedData.map((data, index) => {
     if (index === 0) return { ...data, return: null };
-    const prevClose = sortedData[index - 1].close;
-    const dailyReturn = (data.close - prevClose) / prevClose;
+
+    const prevClose = sortedData[index - 1].close!;
+    const dailyReturn = (data.close! - prevClose) / prevClose;
+
     return { ...data, return: dailyReturn };
   });
 }

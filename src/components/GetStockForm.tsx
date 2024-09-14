@@ -45,7 +45,7 @@ const GetStockForm: React.FC<GetStockFormProps> = ({ fetchDataAction, errors, ti
           />
         </div>
       </div>
-      <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded-md">
+      <button type="submit" className="bg-green-500 text-white py-2 px-4 max-md:w-full rounded-md">
         Generate Data
       </button>
     </form>
