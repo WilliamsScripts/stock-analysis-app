@@ -33,4 +33,6 @@ const CustomSelect = forwardRef<HTMLSelectElement, CustomSelectProps>(({ label, 
   )
 })
 
+CustomSelect.displayName = 'CustomSelect'
+
 export default CustomSelect

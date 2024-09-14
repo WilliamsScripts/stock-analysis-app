@@ -30,4 +30,6 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({ label, nam
   )
 })
 
+CustomInput.displayName = 'CustomInput'
+
 export default CustomInput

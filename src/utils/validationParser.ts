@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const validationParser = (data: any, schema: z.ZodSchema) => {
+export const validationParser = (data: unknown, schema: z.ZodSchema) => {
   const validatedFields = schema.safeParse(data);
   if (!validatedFields.success) {
     return { success: false, errors: validatedFields.error.flatten().fieldErrors };

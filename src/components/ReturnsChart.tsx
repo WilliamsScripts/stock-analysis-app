@@ -8,9 +8,6 @@ type ReturnsChartProps = {
 }
 
 const ReturnsChart: React.FC<ReturnsChartProps> = ({ returnsData }) => {
-  const labels = returnsData.map((entry) => entry.Date);
-  const data = returnsData.map((entry) => entry.return ? entry.return * 100 : 0);
-
   return (
     <ResponsiveContainer height={600} width='100%'>
       <LineChart 

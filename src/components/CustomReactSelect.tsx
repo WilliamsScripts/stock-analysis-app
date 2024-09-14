@@ -43,4 +43,6 @@ const CustomReactSelect = forwardRef<SelectInstance<unknown, boolean> | null, Cu
   )
 })
 
+CustomReactSelect.displayName = 'CustomReactSelect'
+
 export default CustomReactSelect
